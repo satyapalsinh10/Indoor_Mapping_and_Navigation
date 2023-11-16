@@ -1,9 +1,4 @@
 #!/bin/bash
-
-# Copyright (c) Meta Platforms, Inc. and its affiliates.
-# This source code is licensed under the MIT license found in the
-# LICENSE file in the root directory of this source tree.
-
 set -e
 shopt -s extglob
 shopt -s globstar
@@ -18,28 +13,21 @@ catch() {
     echo "An error occured during the installation of Habitat-sim or Habitat-Lab." >&2
   fi
 }
-#Don't change the colab versions for these libraries
-PYTHON_VERSION="$( python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))' )"
-PIL_VERSION="$(python -c 'import PIL; print(PIL.__version__)')"
-CFFI_VERSION="$(python -c 'import cffi; print(cffi.__version__)')"
-NUMPY_VERSION="$(python -c 'import numpy as np; print(np.__version__)')"
-SCIPY_VERSION="$(python -c 'import scipy; print(scipy.__version__)')"
-NUMBA_VERSION="$(python -c 'import numba; print(numba.__version__)')"
 #Install Miniconda
 cd /content/
 wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -bfp /usr/local
 
 #Adds the conda libraries directly to the colab path.
-ln -s "/usr/local/lib/python${PYTHON_VERSION}/dist-packages" "/usr/local/lib/python${PYTHON_VERSION}/site-packages"
+ln -s /usr/local/lib/python3.6/dist-packages /usr/local/lib/python3.6/site-packages
 
 ##Install Habitat-Sim and Magnum binaries
-conda config --set pip_interop_enabled True
+conda config --set default_threads 4 #Enables multithread conda installation
 NIGHTLY="${NIGHTLY:-false}" #setting the ENV $NIGHTLY to true will install the nightly version from conda
 CHANNEL="${CHANNEL:-aihabitat}"
 if ${NIGHTLY}; then
   CHANNEL="${CHANNEL}-nightly"
 fi
-conda install -S -y --prefix /usr/local -c "${CHANNEL}" -c conda-forge habitat-sim headless withbullet "python=${PYTHON_VERSION}" "numpy=${NUMPY_VERSION}" "pillow=${PIL_VERSION}" "cffi=${CFFI_VERSION}" "scipy=${SCIPY_VERSION}" "numba=${NUMBA_VERSION}"
+conda install -y --prefix /usr/local -c "${CHANNEL}" -c conda-forge habitat-sim headless withbullet python=3.6
 
 #Shallow GIT clone for speed
 git clone https://github.com/facebookresearch/habitat-lab --depth 1
@@ -48,15 +36,20 @@ git clone https://github.com/facebookresearch/habitat-sim --depth 1
 #Install Requirements.
 cd /content/habitat-lab/
 set +e
-pip install -r ./habitat-lab/requirements.txt
-reqs=(./habitat-baselines/habitat_baselines/**/requirements.txt)
+pip install -r ./requirements.txt
+reqs=(./habitat_baselines/**/requirements.txt)
 pip install "${reqs[@]/#/-r}"
 set -e
-pip install -e habitat-lab
+python setup.py develop --all
+pip install . #Reinstall to trigger sys.path update
+pip install -U --force-reinstall cffi #Fix bug with CFFI version issue
 cd /content/habitat-sim/
+rm -rf habitat_sim/ # Deletes the habitat_sim folder so it doesn't interfere with import path
 
 #Download Assets
-python src_python/habitat_sim/utils/datasets_download.py --uids ci_test_assets --replace --data-path data/
+wget -c http://dl.fbaipublicfiles.com/habitat/habitat-test-scenes.zip && unzip -o habitat-test-scenes.zip
+wget -c http://dl.fbaipublicfiles.com/habitat/objects_v0.1.zip && unzip -o objects_v0.1.zip -d data/objects/
+wget -c http://dl.fbaipublicfiles.com/habitat/locobot_merged.zip && unzip -o locobot_merged.zip -d data/objects
 
 #symlink assets appear in habitat-api folder
 ln -s /content/habitat-sim/data /content/habitat-lab/.
