@@ -130,12 +130,12 @@ We can enhance the integration of Habitat-Lab with Habitat-Sim to concurrently c
 
 ### The results generated from habitat-sim can be used to generate sparse 3d point cloud map using open_v_slam. 
 
-**The results from open_v_slam are shown below:**
+**The results from [open_v_slam](https://github.com/stella-cv/stella_vslam) are shown below:**
 
 - **Feature Extraction:**
  
 <p align="center">
-  <img src="output_data/navigation_top_map.gif" alt="Undistorted" width="700"/>
+  <img src="output_data/feature_extraction.gif" alt="Undistorted" width="700"/>
 </p>
 
 - **Mapping:**
@@ -145,11 +145,13 @@ We can enhance the integration of Habitat-Lab with Habitat-Sim to concurrently c
 </p>
 
 <p align="center">
-  <img src="output_data/navigation_top_map.gif" alt="Undistorted" width="700"/>
+  <img src="output_data/mapping.gif" alt="Undistorted" width="700"/>
 </p>
 
 
-These dataset can be used to perform different operation like registration, segmentation, etc... on the point cloud which can be used to generate the dataset for traing the learning based model.
+The above generated point cloud dataset can be employed to train learning-based models, enabling them to perform various operations such as registration, segmentation, etc. These capabilities significantly contribute to enhancing performance in both indoor and outdoor mapping and navigation.
+
+
 
 ## Documentation
 
