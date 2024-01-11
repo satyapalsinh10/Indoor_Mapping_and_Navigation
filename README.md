@@ -100,8 +100,8 @@ This project uses Habitat-Matterport 3D Research Dataset [HM3D](https://aihabita
 
    - `W/A/S/D` keys to move forward/left/backward/right
    -  arrow keys or mouse (LEFT click) to control gaze direction (look up/down/left/right)
-   - `O` to start recording the scene environment in equirectangular format.
-   - `P` to save the recording in the current directory which can be used to generate a sparse 3D point cloud map for the Robot/agent to train and navigate.
+   - `O` key to start recording the scene environment in equirectangular format.
+   - `P` key to save the recording in the current directory which can be used to generate a sparse 3D point cloud map for the Robot/agent to train and navigate.
 
  Additionally, `--save_png` can be used to output agent visual observation frames of the physical scene to the current directory.
 
