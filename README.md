@@ -1,6 +1,6 @@
 # Habitat-Sim
 
-This project utilizes the powerful Habitat-Sim, a high-performance physics-enabled 3D simulator, to generate datasets for embodied AI tasks. The simulator supports 3D scans of indoor/outdoor spaces, CAD models, configurable sensors, and robots described via URDF, all while prioritizing simulation speed. The focus is on Habitat-Matterport 3D Research Dataset [HM3D] for dataset generation, specifically creating equirectangular videos from the agent's perspective navigating the environment.
+This project utilizes the powerful Habitat-Sim, a high-performance physics-enabled 3D simulator, to generate datasets for embodied AI tasks. The simulator supports 3D scans of indoor/outdoor spaces, CAD models, configurable sensors, and robots described via URDF, all while prioritizing simulation speed. The focus is on Habitat-Matterport 3D Research Dataset [HM3D](https://aihabitat.org/datasets/hm3d/) for dataset generation, specifically creating equirectangular videos from the agent's perspective navigating the environment.
 
 The design philosophy of Habitat is to prioritize simulation speed over the breadth of simulation capabilities. When rendering a scene from the Matterport3D dataset, Habitat-Sim achieves several thousand frames per second (FPS) running single-threaded and reaches over 10,000 FPS multi-process on a single GPU.
 
@@ -66,6 +66,11 @@ Habitat is under active development, and we advise users to restrict themselves 
 
 Conda packages for older versions can installed by explicitly specifying the version, e.g. `conda install habitat-sim=0.1.6 -c conda-forge -c aihabitat`.
 
+## Datasets
+This project uses Habitat-Matterport 3D Research Dataset [HM3D](https://aihabitat.org/datasets/hm3d/) for generating the dataset and training the model. You can follow the steps provided in official HM3D [Github](https://github.com/facebookresearch/habitat-matterport3d-dataset) repository for getting access to the dataset.
+
+[How To use other common supported datasets with Habitat-Sim](DATASETS.md).
+
 
 ## Testing
 
@@ -73,12 +78,14 @@ Conda packages for older versions can installed by explicitly specifying the ver
 
 1. Download some 3D assets using our python data download utility:
    - Download (testing) 3D scenes
-      ```bash
+       ```bash
       python -m habitat_sim.utils.datasets_download --uids habitat_test_scenes --data-path /path/to/data/
         ```
       
-      Note that these testing scenes do not provide semantic annotations.
-      If you would like to test the semantic sensors via `example.py`, use the data from the Matterport3D dataset (see [Datasets](DATASETS.md)).
+      **Note:**
+       - The supported data file format is `.glb` to improt the envieonment in the habitat-simulator.
+       - These testing scenes do not provide semantic annotations.
+       - If you would like to test the semantic sensors via `example.py`, use the data from the Matterport3D dataset (see [Datasets](DATASETS.md)).
 
 
 1. **Interactive testing**: Use the interactive viewer included with Habitat-Sim in python:
@@ -88,15 +95,9 @@ Conda packages for older versions can installed by explicitly specifying the ver
    #e.g. from 'habitat-sim/' directory run 'export PYTHONPATH=$(pwd)'
    python equirec_navigation.py --scene /path/to/data/scene_datasets/habitat-test-scenes/file_name.glb
    ```
-   
+
    To control an agent in the test scene:
-   
-   Use W/A/S/D keys to move forward/left/backward/right and arrow keys or mouse (LEFT click) to control gaze direction (look up/down/left/right).
-   Try to find the picture of a woman surrounded by a wreath.
-   Have fun!
 
-
-   Quickstart Example:
    - `W/A/S/D` keys to move forward/left/backward/right
    -  arrow keys or mouse (LEFT click) to control gaze direction (look up/down/left/right)
    - `O` to start recording the scene environment in equirectangular format.
@@ -107,6 +108,9 @@ Conda packages for older versions can installed by explicitly specifying the ver
 
 ## Results:
 
+The below results displays the output equirectangular video recorded from the sensor mounted on the agent traversing in the scene whcih can be used to generate the point cloud map of the environment by incoorporating SLAM pipeline.
+
+
 
 
 ## Documentation
@@ -114,10 +118,6 @@ Conda packages for older versions can installed by explicitly specifying the ver
 Browse the online [Habitat-Sim documentation](https://aihabitat.org/docs/habitat-sim/index.html).
 
 To find the answers try asking the developers and community on our [Discussions forum](https://github.com/facebookresearch/habitat-lab/discussions).
-
-## Datasets
-
-[HowTo use common supported datasets with Habitat-Sim](DATASETS.md).
 
 
 ## Citing Habitat
