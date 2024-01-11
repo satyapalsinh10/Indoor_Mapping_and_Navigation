@@ -148,7 +148,7 @@ We can enhance the integration of Habitat-Lab with Habitat-Sim to concurrently c
 - **3D Point Cloud Map:**
   
 <p align="center">
-  <img src="output_data/mapping.gif" alt="Undistorted" width="700"/>
+  <img src="output_data/3d_sparse_map__.gif" alt="Undistorted" width="700"/>
 </p>
 
 
