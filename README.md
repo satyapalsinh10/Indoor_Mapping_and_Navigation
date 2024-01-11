@@ -1,4 +1,4 @@
-# Habitat-Sim
+# Indoor_Mapping and Navigation using Habitat-Sim and OpenV_SLAM
 
 This project utilizes the powerful Habitat-Sim, a high-performance physics-enabled 3D simulator, to generate datasets for embodied AI tasks. The simulator supports 3D scans of indoor/outdoor spaces, CAD models, configurable sensors, and robots described via URDF, all while prioritizing simulation speed. The focus is on Habitat-Matterport 3D Research Dataset [HM3D](https://aihabitat.org/datasets/hm3d/) for dataset generation, specifically creating equirectangular videos from the agent's perspective navigating the environment.
 
