@@ -108,10 +108,17 @@ This project uses Habitat-Matterport 3D Research Dataset [HM3D](https://aihabita
 
 ## Results:
 
-The below results displays the output equirectangular video recorded from the sensor mounted on the agent traversing in the scene whcih can be used to generate the point cloud map of the environment by incoorporating SLAM pipeline.
+The below results displays the output equirectangular video recorded from the sensor mounted on the agent traversing in the scene which can be used to generate the point cloud map of the environment by incoorporating SLAM pipeline.
 
 <p align="center">
   <img src="output_data/equirec_output.gif" alt="Undistorted" width="700"/>
+</p>
+
+
+We can enhance the integration of Habitat-Lab with Habitat-Sim to concurrently capture equirectangular videos of the agent navigating the scene and localize the agent within the environment, providing a top-down view as illustrated below.
+
+<p align="center">
+  <img src="output_data/navigation_top_map.gif" alt="Undistorted" width="700"/>
 </p>
 
 
