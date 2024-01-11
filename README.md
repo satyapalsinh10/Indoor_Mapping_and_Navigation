@@ -141,15 +141,21 @@ We can enhance the integration of Habitat-Lab with Habitat-Sim to concurrently c
 - **Mapping:**
   
 <p align="center">
-  <img src="output_data/navigation_top_map.gif" alt="Undistorted" width="700"/>
+  <img src="output_data/mapping.gif" alt="Undistorted" width="700"/>
 </p>
 
+
+- **3D Point Cloud Map:**
+  
 <p align="center">
   <img src="output_data/mapping.gif" alt="Undistorted" width="700"/>
 </p>
 
 
-The above generated point cloud dataset can be employed to train learning-based models, enabling them to perform various operations such as registration, segmentation, etc. These capabilities significantly contribute to enhancing performance in both indoor and outdoor mapping and navigation.
+
+The above generated point cloud dataset can be employed to train learning-based models, enabling them to perform various operations such as registration, segmentation, etc. These capabilities significantly contribute to enhancing
+performance in both indoor and outdoor mapping and navigation.
+
 
 
 
